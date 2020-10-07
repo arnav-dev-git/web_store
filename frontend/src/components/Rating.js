@@ -76,7 +76,7 @@ Rating.defaultProps = {
 };
 
 Rating.propTypes = {
-  stars: PropTypes.number.isRequired,
+  // stars: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   color: PropTypes.string,
 };

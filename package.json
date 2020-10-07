@@ -3,12 +3,23 @@
   "version": "1.0.0",
   "description": "It is a mern stack build ecommerce website ",
   "main": "server.js",
+  "type": "module",
   "dependencies": {
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5",
     "react-router-bootstrap": "^0.25.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
-    "start": "node backend/server"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

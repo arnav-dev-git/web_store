@@ -1,14 +1,16 @@
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import products from "./data/products.js";
+
 const app = express();
+dotenv.config();
 
-const products = require("./data/products");
-
-app.listen("5000", () => {
-  console.log("Server is running ...");
-});
+const PORT = process.env.PORT || 5001;
 
 app.get("/", (req, res) => {
-  res.send("Backend server is running ... ");
+  res.send(
+    `Server is running in ${process.env.NODE_ENV} mode at port ${PORT} ...`
+  );
 });
 
 app.get("/api/products", (req, res) => {
@@ -18,4 +20,10 @@ app.get("/api/products", (req, res) => {
 app.get("/api/products/:id", (req, res) => {
   const product = products.find((p) => p._id === req.params.id);
   res.json(product);
+});
+
+app.listen(PORT, () => {
+  console.log(
+    `Server is running in ${process.env.NODE_ENV} mode at port ${PORT} ...`
+  );
 });
