@@ -8,7 +8,7 @@ import { notFound, errorHandeler } from "./middleWare/errorMiddleWare.js";
 
 const app = express();
 
-app.use(notFound);
+// app.use(notFound);
 app.use(errorHandeler);
 
 app.use("/api/products", productRoutes);
