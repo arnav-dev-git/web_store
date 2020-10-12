@@ -4,8 +4,13 @@ import dotenv from "dotenv";
 import connectDB from "./config/setup.js";
 import colors from "colors";
 import productRoutes from "../backend/routs/productRoutes.js";
+import { notFound, errorHandeler } from "./middleWare/errorMiddleWare.js";
 
 const app = express();
+
+app.use(notFound);
+app.use(errorHandeler);
+
 app.use("/api/products", productRoutes);
 dotenv.config();
 connectDB();
