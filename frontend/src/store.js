@@ -6,6 +6,7 @@ import { productListReducer } from "../src/reducer/productReducer";
 const reducer = combineReducers({
   productList: productListReducer,
 });
+
 const initialState = {};
 const middleware = [thunk];
 const store = createStore(
