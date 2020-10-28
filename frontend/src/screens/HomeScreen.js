@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
-import axios from "axios";
 import { useEffect } from "react";
 import { listProducts } from "../../src/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";

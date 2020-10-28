@@ -43,7 +43,7 @@ const ProductScreen = ({ match }) => {
             // style={{ borderColor: "rgba(255,255,255,0)" }}
           >
             <ListGroup.Item className="bg-success text-white ">
-              <h3>{product.name} hello</h3>
+              <h3>{product.name}</h3>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
