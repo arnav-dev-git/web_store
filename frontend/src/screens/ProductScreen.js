@@ -10,18 +10,12 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const ProductScreen = ({ match }) => {
-  // const product = products.find((product) => product._id === match.params.id);
+  const [qty, setQty] = useState(0);
 
-  // const [product, setProduct] = useState({});
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
 
   useEffect(() => {
-    // const fetchProduct = async () => {
-    //   const { data } = await axios.get(`/api/products/${match.params.id}`);
-    //   setProduct(data);
-    // };
-    // fetchProduct();
     dispatch(listProductDetails(match.params.id));
   }, [match, dispatch]);
 
@@ -102,6 +96,14 @@ const ProductScreen = ({ match }) => {
                     <Col>{product.brand}</Col>
                   </Row>
                 </ListGroup.Item>
+
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <col>Qty: </col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
 
                 <ListGroup.Item>
                   <Button
