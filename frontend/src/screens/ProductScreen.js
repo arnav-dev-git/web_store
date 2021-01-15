@@ -16,8 +16,8 @@ import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-const ProductScreen = ({ match }) => {
-  const [qty, setQty] = useState(0);
+const ProductScreen = ({ match, history }) => {
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
@@ -27,6 +27,10 @@ const ProductScreen = ({ match }) => {
   }, [match, dispatch]);
 
   const { loading, error, product } = productDetails;
+
+  const addToCartHandeler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -125,6 +129,7 @@ const ProductScreen = ({ match }) => {
                   <Button
                     className="btn-block btn-info"
                     type="button"
+                    onClick={addToCartHandeler}
                     disabled={product.countInStock === 0}
                   >
                     Add to cart
