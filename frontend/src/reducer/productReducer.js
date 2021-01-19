@@ -28,25 +28,3 @@ export const productDetailsReducer = (
       return state;
   }
 };
-
-export const cartReducer = (state = { cartItems: [] }, action) => {
-  switch (action.type) {
-    case "CART_ADD_ITEM":
-      const item = action.payload;
-      const existsItem = state.cartItems.find(
-        (itm) => itm.product === item.product
-      );
-
-      if (existsItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existsItem.product ? item : x
-          ),
-        };
-      }
-
-    default:
-      return state;
-  }
-};
