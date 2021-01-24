@@ -6,7 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const Header = () => {
   return (
     <header>
-      <Navbar expand="lg" className="navbar-dark bg-primary" collapseOnSelect>
+      <Navbar expand="lg" className="navbar-dark bg-secondary" collapseOnSelect>
         <Container>
           <LinkContainer to="/" exact>
             <Navbar.Brand>Electron Store</Navbar.Brand>

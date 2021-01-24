@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", fontSize: "12vw" }}>Latest Products</h1>
+      <h1 style={{ textAlign: "center", fontSize: "8vw" }}>Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (

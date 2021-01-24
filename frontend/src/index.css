@@ -24,3 +24,17 @@ main {
 a:link {
   text-decoration: none;
 }
+
+h1 {
+  font-size: 1.8rem !important;
+  padding: 1rem 0 !important;
+}
+
+h2 {
+  font-size: 1.4rem !important;
+  padding: 0.5rem 0 !important;
+}
+
+/* .shopping-cart-heading {
+  margin-bottom: 1.5rem;
+} */

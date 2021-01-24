@@ -27,7 +27,7 @@ const Product = ({ product }) => {
           </Card.Text>
           <Card.Text
             as="p"
-            style={{ color: "#232323", fontSize: "25px" }}
+            style={{ fontSize: "25px" }} //color: "#232323",
             className="mb-0"
           >
             ${product.price}
