@@ -17,7 +17,7 @@ export const productDetailsReducer = (
 ) => {
   switch (action.type) {
     case "DELETE_PREVIOUS_PRODUCT":
-      state = { product: { reviews: [] } };
+      return (state = { product: { reviews: [] } });
     case "PRODUCT_DETAILS_REQUEST":
       return { loading: true, ...state };
     case "PRODUCT_DETAILS_SUCCESS":
