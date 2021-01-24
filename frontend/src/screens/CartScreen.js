@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 import {
   Row,
   Col,
@@ -23,7 +23,7 @@ const CartScreen = ({ match, history, location }) => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, productId, qty, history]);
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -31,8 +31,8 @@ const CartScreen = ({ match, history, location }) => {
   console.log("cart items: ", cartItems.length);
   console.log("product id : ", productId);
 
-  const removeItemFromCartHandler = (e) => {
-    console.log("Remove: ", e);
+  const removeItemFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
