@@ -32,7 +32,11 @@ const CartScreen = ({ match, history, location }) => {
   console.log("product id : ", productId);
 
   const removeItemFromCartHandler = (e) => {
-    console.log(e);
+    console.log("Remove: ", e);
+  };
+
+  const checkoutHandler = () => {
+    history.push("/login?redirect=shipping");
   };
 
   return (
@@ -101,7 +105,15 @@ const CartScreen = ({ match, history, location }) => {
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button type="button"></Button>
+              <Button
+                type="button"
+                className="btn-block"
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+                style={{ letterSpacing: "0.1rem" }}
+              >
+                PROCEED TO CHECKOUT
+              </Button>
             </ListGroup.Item>
           </ListGroup>
         </Card>
