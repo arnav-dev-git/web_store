@@ -22,6 +22,7 @@ const CartScreen = ({ match, history, location }) => {
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
+      history.replace("/cart");
     }
   }, [dispatch, productId, qty, history]);
 
