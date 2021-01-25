@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/setup.js";
 import colors from "colors";
 import productRoutes from "../backend/routs/productRoutes.js";
-import { notFound, errorHandeler } from "./middleWare/errorMiddleWare.js";
+import { errorHandeler } from "./middleWare/errorMiddleWare.js";
 
 const app = express();
 
