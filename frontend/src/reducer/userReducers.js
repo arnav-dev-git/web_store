@@ -1,4 +1,4 @@
-export const userLoginReducer = (action, state = {}) => {
+export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_LOGIN_REQUEST":
       return { loading: true };
