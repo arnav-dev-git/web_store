@@ -19,7 +19,8 @@ const LoginScreen = ({ location, history }) => {
   const subminHandler = (e) => {
     e.preventDefault();
     // DISPATCH LOGIN
-    dispatch(login({ email, password }));
+    // console.log(email, password);
+    dispatch(login(email, password));
   };
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -33,7 +34,7 @@ const LoginScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Sign in</h1>
-      {error && <Message variant="danger">{error}</Message>}
+      {error && <Message variant="secondary">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={subminHandler}>
         <Form.Group controlId="email">
@@ -42,7 +43,7 @@ const LoginScreen = ({ location, history }) => {
             type="email"
             placeholder="Enter your email"
             value={email}
-            required="true"
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -52,7 +53,7 @@ const LoginScreen = ({ location, history }) => {
             type="password"
             placeholder="Enter your password"
             value={password}
-            required="true"
+            required={true}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>

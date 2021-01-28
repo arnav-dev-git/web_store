@@ -2,7 +2,9 @@ import axios from "axios";
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    dispatch({ type: "USER_LOGIN_REQUEST" });
+    dispatch({
+      type: "USER_LOGIN_REQUEST",
+    });
 
     const config = {
       headers: {
@@ -16,17 +18,19 @@ export const login = (email, password) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: "USER_LOGIN_SUCCESS", payload: data });
+    dispatch({
+      type: "USER_LOGIN_SUCCESS",
+      payload: data,
+    });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
     dispatch({
       type: "USER_LOGIN_FAIL",
-      payload: "Invalid email or password",
-      // err.response && err.response.data.message
-      //   ? err.response.data.message
-      //   : err.response,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
