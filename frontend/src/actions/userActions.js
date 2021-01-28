@@ -20,12 +20,13 @@ export const login = (email, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (err) {
+    console.log(err);
     dispatch({
       type: "USER_LOGIN_FAIL",
-      payload:
-        err.response && err.response.data.message
-          ? err.response.data.message
-          : err.response,
+      payload: "Invalid email or password",
+      // err.response && err.response.data.message
+      //   ? err.response.data.message
+      //   : err.response,
     });
   }
 };
