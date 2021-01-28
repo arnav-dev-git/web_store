@@ -5,14 +5,14 @@ import connectDB from "./config/setup.js";
 import colors from "colors";
 import productRoutes from "../backend/routs/productRoutes.js";
 import userRoutes from "../backend/routs/userRoutes.js";
-import { errorHandeler } from "./middleWare/errorMiddleWare.js";
+import { errorHandler, notFound } from "./middleWare/errorMiddleWare.js";
 
 const app = express();
 
 app.use(express.json());
 
 // app.use(notFound);
-app.use(errorHandeler);
+app.use(errorHandler);
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
@@ -27,6 +27,9 @@ app.get("/", (req, res) => {
     `Server is running in ${process.env.NODE_ENV} mode at port ${PORT} ...`
   );
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   // console.log(

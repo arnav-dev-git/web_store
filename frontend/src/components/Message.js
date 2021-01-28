@@ -5,10 +5,7 @@ const Message = ({ varient, children }) => {
   //   return <Alert varient={varient}>{children}</Alert>;
   return (
     <>
-      <Alert
-        // varient={varient}
-        className={`alert alert-dismissible alert-${varient}`}
-      >
+      <Alert className={`alert alert-dismissible alert-danger`}>
         {children}
       </Alert>
     </>
