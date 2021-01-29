@@ -49,9 +49,9 @@ const ProductScreen = ({ match, history }) => {
                 src={product.image}
                 alt={product.name}
                 fluid
-                style={{
-                  borderRadius: "555px 25px 15px 25px/35px 50px 35px 655px",
-                }}
+                // style={{
+                //   borderRadius: "555px 25px 15px 25px/35px 50px 35px 655px",
+                // }}
               />
             </div>
           </Col>

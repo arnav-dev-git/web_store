@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import "./bootstrap.min.css";
+// import "./bootstrap.min.css";  //sketch theme
 // import "./darkly_bootstrap.min.css";
+import "./lux_bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import * as serviceWorker from "./serviceWorker";
