@@ -19,7 +19,9 @@ const Header = () => {
       <Navbar expand="lg" className="navbar-dark bg-primary" collapseOnSelect>
         <Container>
           <LinkContainer to="/" exact>
-            <Navbar.Brand>Electron Store</Navbar.Brand>
+            <Nav.Link>
+              <Navbar.Brand>Electron Store</Navbar.Brand>
+            </Nav.Link>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
