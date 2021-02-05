@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -21,6 +20,9 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -34,44 +36,40 @@ const ProfileScreen = ({ location, history }) => {
     }
   }, [dispatch, history, userInfo, user]);
 
-  const subminHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    // DISPATCH REGISTER
     if (password !== confirmPassword) {
       setMessage("Password do not match !");
     } else {
-      //! DISPATCH UPDATE PROFILE
+      setMessage(null);
+      //& DISPATCH UPDATE PROFILE
+      // console.log({ id: user._id, name, email, password }, "action_data");
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
-
-  // const redirect = location.search ? location.search.split("=")[1] : "/";
-
-  // const userInfoInLocalStorage = localStorage.getItem("userInfo");
-
-  // useEffect(() => {
-  //   if (userInfoInLocalStorage && userInfo) {
-  //     history.push(redirect);
-  //   }
-  // }, [history, userInfoInLocalStorage, userInfo, redirect]);
 
   return (
     <>
       <Row>
-        <Col md={3}>
+        <Col md={5}>
           <h2>User Profile</h2>
-          {error && <Message variant="success">{error}</Message>}
-          {message && <Message variant="success">{message}</Message>}
+          {error && <Message variant="danger">{error}</Message>}
+          {/* //& password and confirm password */}
+          {message && <Message variant="danger">{message}</Message>}
+          {success && (
+            <Message variant="success">Profile Updated Successfully</Message>
+          )}
           {loading ? (
             <Loader />
           ) : (
-            <Form onSubmit={subminHandler}>
+            <Form onSubmit={submitHandler}>
               <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter your Name"
                   value={name}
-                  required={true}
+                  // required={true}
                   onChange={(e) => setName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -81,7 +79,7 @@ const ProfileScreen = ({ location, history }) => {
                   type="email"
                   placeholder="Enter your email"
                   value={email}
-                  required={true}
+                  // required={true}
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -91,7 +89,7 @@ const ProfileScreen = ({ location, history }) => {
                   type="password"
                   placeholder="Enter your password"
                   value={password}
-                  required={true}
+                  // required={true}
                   onChange={(e) => setPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -101,7 +99,7 @@ const ProfileScreen = ({ location, history }) => {
                   type="password"
                   placeholder="Confirm Passwword"
                   value={confirmPassword}
-                  required={true}
+                  // required={true}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -111,7 +109,7 @@ const ProfileScreen = ({ location, history }) => {
             </Form>
           )}
         </Col>
-        <Col md={9}>
+        <Col md={7}>
           <h2>Your Orders</h2>
         </Col>
       </Row>

@@ -1,11 +1,11 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 
-const Message = ({ varient, children }) => {
+const Message = ({ variant, children }) => {
   //   return <Alert varient={varient}>{children}</Alert>;
   return (
     <>
-      <Alert className={`alert alert-dismissible alert-danger`}>
+      <Alert className={`alert alert-dismissible`} variant={variant}>
         {children}
       </Alert>
     </>
