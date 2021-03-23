@@ -4,6 +4,8 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
 
+import { motion } from "framer-motion";
+
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -15,7 +17,15 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <motion.header
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      }}
+    >
       <Navbar expand="lg" className="navbar-dark bg-primary" collapseOnSelect>
         <Container>
           <LinkContainer to="/" exact>
@@ -53,7 +63,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </header>
+    </motion.header>
   );
 };
 

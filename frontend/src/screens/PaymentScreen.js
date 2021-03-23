@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-import { saveShippingAddress } from "../actions/cartActions";
+// import { savePaymentMethod } from "../actions/cartActions";
 
-const ShippingScreen = ({ history }) => {
+const PaymentScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -91,4 +91,4 @@ const ShippingScreen = ({ history }) => {
   );
 };
 
-export default ShippingScreen;
+export default PaymentScreen;
