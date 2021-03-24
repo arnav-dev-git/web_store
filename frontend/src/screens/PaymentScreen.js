@@ -5,23 +5,23 @@ import { useSelector, useDispatch } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-// import { savePaymentMethod } from "../actions/cartActions";
+import { savePaymentMethod } from "../actions/cartActions";
 
 const PaymentScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  const [address, setAddress] = useState(shippingAddress.address);
-  const [city, setCity] = useState(shippingAddress.city);
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  if (!shippingAddress) {
+    history.push("/shipping");
+  }
 
+  const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    history.push("/payment");
+    dispatch(savePaymentMethod(paymentMethod));
+    history.push("/placeorder");
   };
 
   return (
@@ -35,53 +35,33 @@ const PaymentScreen = ({ history }) => {
       }}
     >
       <FormContainer>
-        <CheckoutSteps step1 step2 />
-        <h1>Shipping</h1>
+        <CheckoutSteps step1 step2 step3 />
+        <h1>Payment Method</h1>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="address">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your Address"
-              value={address}
-              required
-              onChange={(e) => setAddress(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+          <Form.Group>
+            <Form.Label as="legend">Select Method</Form.Label>
 
-          <Form.Group controlId="city">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your City"
-              value={city}
-              required
-              onChange={(e) => setCity(e.target.value)}
-            ></Form.Control>
+            <Col>
+              <Form.Check
+                type="radio"
+                label="PayPal or Credit Card"
+                id="PayPal"
+                name="paymentMethod"
+                value="PayPal"
+                checked
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></Form.Check>
+              {/* <Form.Check
+                type="radio"
+                label="Debit Card or Credit Card"
+                id="stripe"
+                name="paymentMethod"
+                value="stripe"
+                checked={false}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></Form.Check> */}
+            </Col>
           </Form.Group>
-
-          <Form.Group controlId="postalCode">
-            <Form.Label>Postal Code</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your postalCode"
-              value={postalCode}
-              required
-              onChange={(e) => setPostalCode(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId="country">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your Country"
-              value={country}
-              required
-              onChange={(e) => setCountry(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
           <Button type="submit" variant="primary">
             Submit
           </Button>
