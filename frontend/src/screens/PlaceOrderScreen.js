@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button, Col, Row, ListGroup, Image, Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
+import { createOrder } from "../actions/orderActions";
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
 
   //add .00 after a number
   const addDecimal = (num) => {
@@ -30,7 +33,31 @@ const PlaceOrderScreen = () => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
-  const placeOrderHandler = () => {};
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`orders/${order._id}`);
+      // console.log(order);
+    }
+    //! to remove the warning from useEffect about { order._id }
+    // eslint-disable-next-line
+  }, [history, success]);
+
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
 
   return (
     <>
@@ -133,6 +160,9 @@ const PlaceOrderScreen = () => {
                     <Col>Total</Col>
                     <Col>${cart.totalPrice}</Col>
                   </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  {error && <Message variant="danger">{error}</Message>}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
