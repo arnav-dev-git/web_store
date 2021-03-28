@@ -3,9 +3,12 @@ import dotenv from "dotenv";
 // import products from "./data/products.js";
 import connectDB from "./config/setup.js";
 import colors from "colors";
+
+import { errorHandler, notFound } from "./middleWare/errorMiddleWare.js";
+
 import productRoutes from "../backend/routs/productRoutes.js";
 import userRoutes from "../backend/routs/userRoutes.js";
-import { errorHandler, notFound } from "./middleWare/errorMiddleWare.js";
+import orderRoutes from "../backend/routs/orderRoutes.js";
 
 const app = express();
 
@@ -16,6 +19,7 @@ app.use(errorHandler);
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 dotenv.config();
 connectDB();
