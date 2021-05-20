@@ -19,7 +19,6 @@ export const addOrderItems = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No product is selected !");
-    return;
   } else {
     const order = new Order({
       orderItems,
@@ -34,5 +33,22 @@ export const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
+  }
+});
+
+//* @Desc: Get Orders
+//^ @route GET /api/orders
+//& @access Private
+
+export const getOrderItems = asyncHandler(async (req, res) => {
+  const order = await (
+    await Order.findById(req.params.id)
+  ).populate("user", "name email");
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error("order not found");
   }
 });
