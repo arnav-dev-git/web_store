@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
+import User from "../models/userModel.js";
 
 //* @Desc: Create New Order
 //^ @route POST /api/orders
@@ -41,9 +42,11 @@ export const addOrderItems = asyncHandler(async (req, res) => {
 //& @access Private
 
 export const getOrderItems = asyncHandler(async (req, res) => {
-  const order = await (
-    await Order.findById(req.params.id)
-  ).populate("user", "name email");
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email",
+    User
+  );
 
   if (order) {
     res.json(order);
